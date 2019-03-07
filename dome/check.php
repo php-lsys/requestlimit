@@ -26,10 +26,10 @@ $vc=new RequestLimit($key,$storage,$captcha);
 
 //默认规则参见:RequestLimit::$rule 
 //清除已设置规则
-//$vc->clear_limit();
+//$vc->clearLimit();
 //设置规则
-//$vc->set_limit(60/*时间,单位秒*/,100/*指超过100次请求屏蔽*/,50/*超过50次请求需要输入验证码*/);
-//$vc->set_limit(600,1000,500);
+//$vc->setLimit(60/*时间,单位秒*/,100/*指超过100次请求屏蔽*/,50/*超过50次请求需要输入验证码*/);
+//$vc->setLimit(600,1000,500);
 
 $status=$vc->is();//得到当前请求的状态
 //RequestLimit::IS_CAPTCHA 表示需要验证码
@@ -37,8 +37,8 @@ $status=$vc->is();//得到当前请求的状态
 //其他表示通过
 if($status==RequestLimit::IS_CAPTCHA){
 	if (!isset($_GET['code'])){//提示需要输入验证码
-		if ($vc->get_captcha() instanceof LSYS\Captcha\Geetest) {
-			$res=$vc->get_captcha()->get_result();
+		if ($vc->getCaptcha() instanceof LSYS\Captcha\Geetest) {
+			$res=$vc->getCaptcha()->getResult();
 			include "geetest/show.php";
 		}else include "captcha/show.php";
 		die();
@@ -47,7 +47,7 @@ if($status==RequestLimit::IS_CAPTCHA){
 		die('验证码错误');
 	}
 }else if ($status==RequestLimit::IS_BLOCK){
-        $time=$vc->next_time();//得到重新开放访问时间
+        $time=$vc->nextTime();//得到重新开放访问时间
 	die("屏蔽,请在{$time}秒后尝试访问");
 }
 die("通过");

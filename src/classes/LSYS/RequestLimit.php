@@ -76,7 +76,7 @@ class RequestLimit{
 	 * 清除限制
 	 * @return \LSYS\RequestLimit
 	 */
-	public function clear_limit(){
+	public function clearLimit(){
 		$this->_rule=array();
 		return $this;
 	}
@@ -89,7 +89,7 @@ class RequestLimit{
 	 * @param number $captcha_num
 	 * @return \LSYS\RequestLimit
 	 */
-	public function set_limit($time,$captcha_num,$block_num=0){
+	public function setLimit($time,$captcha_num,$block_num=0){
 		$this->_rule[$time]=array($captcha_num,$block_num);
 		return $this;
 	}
@@ -98,7 +98,7 @@ class RequestLimit{
 	 * @param string $ip
 	 * @return \LSYS\RequestLimit
 	 */
-	public function set_ip($ip){
+	public function setIp($ip){
 		$this->_ip=$ip;
 		return $this;
 	}
@@ -106,7 +106,7 @@ class RequestLimit{
 	 * 当前被屏蔽时,开放屏蔽时间
 	 * @return number
 	 */
-	public function next_time(){
+	public function nextTime(){
 		$rules=$this->_rule;
 		krsort($rules);
 		foreach ($rules as $k=>$rule){
@@ -172,7 +172,7 @@ class RequestLimit{
 	 * 获取验证码对象
 	 * @return \LSYS\Captcha|NULL
 	 */
-	public function get_captcha(){
+	public function getCaptcha(){
 		return $this->_captcha;
 	}
 }

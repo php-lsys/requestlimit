@@ -1,7 +1,7 @@
 <?php
 //显示页面
-$t = $vc->get_captcha();
-$res=$t->get_result();
+$t = $vc->getCaptcha();
+$res=$t->getResult();
 ?>
 <script src="http://code.jquery.com/jquery-1.12.3.min.js"></script>
 <form action="check.php" method="GET">

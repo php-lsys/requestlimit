@@ -2,7 +2,7 @@
 	"name" : "lsys/requestlimit",
 	"type" : "library",
 	"license": "Apache-2.0",
-	"version" : "1.0.0",
+	"version" : "2.0.0",
 	"description" : "lsys module requestlimit",
 	"autoload" : {
 		"psr-4" : {
@@ -14,17 +14,17 @@
 	},
 	"require" : {
 		"php" : ">=5.5",
-		"lsys/captcha" : "~1.0.0",
-		"lsys/config" : "~1.0.0"
+		"lsys/captcha" : "~2.0.0",
+		"lsys/config" : "~2.0.0"
 	},
 	"require-dev" : {
-		"lsys/captcha" : "~1.0.0",
-		"lsys/captcha-geetest" : "~1.0.0",
+		"lsys/captcha" : "~2.0.0",
+		"lsys/captcha-geetest" : "~2.0.0",
 		"gee-team/gt-php-sdk" : "dev-master"
 	},
 	"suggest": {
-		"lsys/requestlimit-storage-memcache":"~1.0.0",
-		"lsys/requestlimit-storage-redis":"~1.0.0",
-		"lsys/requestlimit-storage-memcached":"~1.0.0"
+		"lsys/requestlimit-storage-memcache":"~2.0.0",
+		"lsys/requestlimit-storage-redis":"~2.0.0",
+		"lsys/requestlimit-storage-memcached":"~2.0.0"
     }
 }
