@@ -6,9 +6,9 @@
 
 > 默认数据存放文件,还可以使用以下依赖包:
 	
-	"lsys/requestlimit-storage-memcache":"~1.0.0",
-	"lsys/requestlimit-storage-redis":"~1.0.0",
-	"lsys/requestlimit-storage-memcached":"~1.0.0"
+	"lsys/requestlimit-storage-memcache":"~2.0.0",
+	"lsys/requestlimit-storage-redis":"~2.0.0",
+	"lsys/requestlimit-storage-memcached":"~2.0.0"
 
 ```
 <?php
