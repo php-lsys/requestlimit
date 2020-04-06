@@ -17,16 +17,16 @@
 		]
 	},
 	"require" : {
-		"lsys/captcha" : "~0.0.0",
-		"lsys/config" : "~0.0.0"
+		"lsys/captcha" : "~0.0.1",
+		"lsys/config" : "~0.0.1"
 	},
 	"require-dev" : {
-		"lsys/captcha" : "~0.0.0",
+		"lsys/captcha" : "~0.0.1",
 		"gee-team/gt-php-sdk" : "dev-master"
 	},
 	"suggest": {
-		"lsys/memcache":"~0.0.0",
-		"lsys/redis":"~0.0.0",
-		"lsys/memcached":"~0.0.0"
+		"lsys/memcache":"~0.0.1",
+		"lsys/redis":"~0.0.1",
+		"lsys/memcached":"~0.0.1"
     }
 }
