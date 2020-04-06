@@ -3,13 +3,6 @@
 2. 统一的验证码接口,可以接入你的想要的任何验证码类库或自行实现验证码
 3. 可以用在如注册,手机验证码获取等页面,防止机器人请求
 
-
-> 默认数据存放文件,还可以使用以下依赖包:
-	
-	"lsys/requestlimit-storage-memcache":"~2.0.0",
-	"lsys/requestlimit-storage-redis":"~2.0.0",
-	"lsys/requestlimit-storage-memcached":"~2.0.0"
-
 ```
 <?php
 use LSYS\RequestLimit;
