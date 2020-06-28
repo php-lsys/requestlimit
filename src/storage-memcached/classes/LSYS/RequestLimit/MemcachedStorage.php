@@ -8,7 +8,7 @@ class MemcachedStorage implements Storage{
 	public function __construct(\LSYS\Memcached $memcache=null){
 	    $this->_mem=$memcache?$memcache:\LSYS\Memcached\DI::get()->memcached();
 	}
-	public function add($key,$time){
+	public function add(string $key,int $time):bool{
 	    $this->_mem->configServers();
 		$time_key=$key."_time";
 		if($this->_mem->get($time_key)==NULL){
@@ -25,14 +25,14 @@ class MemcachedStorage implements Storage{
 		}
 		return true;
 	}
-	public function get($key){
+	public function get(string $key):int{
 	    $this->_mem->configServers();
-		return $this->_mem->get($key);
+		return (int)$this->_mem->get($key);
 	}
-	public function ttl($key){
+	public function ttl(string $key):int{
 	    $this->_mem->configServers();
-		$time=$this->_mem->get($key."_time");
-		if ($time==null||$save_time-time()<=0) return 0;
+	    $save_time=$this->_mem->get($key."_time");
+		if ($save_time==null||$save_time-time()<=0) return 0;
 		return $save_time-time();
 	}
 }

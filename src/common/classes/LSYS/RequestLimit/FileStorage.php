@@ -7,7 +7,7 @@ class FileStorage implements Storage{
 	protected $_dir;
 	/**
 	 */
-	public function __construct($dir=null){
+	public function __construct(?string $dir=null){
 		if($dir==null)$dir=sys_get_temp_dir();
 		$this->_dir=rtrim($dir,"\\/").DIRECTORY_SEPARATOR;
 	}
@@ -17,7 +17,7 @@ class FileStorage implements Storage{
 		if(!is_dir($this->_dir.$dir))mkdir($this->_dir.$dir);
 		return $this->_dir.$dir.DIRECTORY_SEPARATOR.$file.".rqcache";
 	}
-	public function add($key,$time){
+	public function add(string $key,int $time):bool{
 		$file=$this->_file($key);
 		is_file($file)?$f=fopen($file, "r+"):$f=fopen($file, "a+");
 		$ntime=time();
@@ -37,22 +37,22 @@ class FileStorage implements Storage{
 		fclose($f);
 		return true;
 	}
-	public function get($key){
+	public function get(string $key):int{
 		$file=$this->_file($key);
 		if (!is_file($file)) return 0;
 		$data=file_get_contents($file);
 		if (empty($data))return 0;
 		list($t,$n)=explode("|", $data);
 		if ($t<=time()) return 0;
-		return $n;
+		return intval($n);
 	}
-	public function ttl($key){
+	public function ttl(string $key):int{
 		$file=$this->_file($key);
 		if (!is_file($file)) return 0;
 		$data=file_get_contents($file);
 		if (empty($data))return 0;
 		list($t,$n)=explode("|", $data);
 		$t=$t-time();
-		return $t>0?$t:0;
+		return $t>0?intval($t):0;
 	}
 }

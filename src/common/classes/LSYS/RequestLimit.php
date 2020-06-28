@@ -44,7 +44,7 @@ class RequestLimit{
 	 * @param Storage $storage
 	 * @param Captcha $captcha
 	 */
-	public function __construct($token,Storage $storage,Captcha $captcha=null){
+	public function __construct(string $token,Storage $storage,Captcha $captcha=null){
 		if (isset($_SERVER['HTTP_X_FORWARDED_FOR'])
 				AND isset($_SERVER['REMOTE_ADDR']))
 		{
@@ -89,7 +89,7 @@ class RequestLimit{
 	 * @param number $captcha_num
 	 * @return \LSYS\RequestLimit
 	 */
-	public function setLimit($time,$captcha_num,$block_num=0){
+	public function setLimit(int $time,int $captcha_num,int $block_num=0){
 		$this->_rule[$time]=array($captcha_num,$block_num);
 		return $this;
 	}
@@ -98,7 +98,7 @@ class RequestLimit{
 	 * @param string $ip
 	 * @return \LSYS\RequestLimit
 	 */
-	public function setIp($ip){
+	public function setIp(string $ip){
 		$this->_ip=$ip;
 		return $this;
 	}
@@ -106,26 +106,26 @@ class RequestLimit{
 	 * 当前被屏蔽时,开放屏蔽时间
 	 * @return number
 	 */
-	public function nextTime(){
+	public function nextTime():int{
 		$rules=$this->_rule;
 		krsort($rules);
 		foreach ($rules as $k=>$rule){
 			$num=$this->_storage->get($this->_key(self::IS_BLOCK, $k));//屏蔽
-			list($c,$b)=$rule;
+			$b=$rule[1]??0;
 			if ($b>0&&$b>=$num){
 				return $this->_storage->ttl($this->_key(self::IS_BLOCK, $k));
 			}
 		}
 		return 0;
 	}
-	protected function _key($is,$k){
+	protected function _key($is,$k):string{
 		return $is.$k.$this->_ip.$this->_token;
 	}
 	/**
 	 * 获取当前TOKEN的IS状态
-	 * @return string
+	 * @return int
 	 */
-	public function is(){
+	public function is():int{
 		$rules=$this->_rule;
 		krsort($rules);
 		foreach ($rules as $k=>$rule){
@@ -145,7 +145,7 @@ class RequestLimit{
 		return self::IS_PASS;
 	}
 	protected function _set(){
-		foreach ($this->_rule as $k=>$rule){
+	    foreach (array_keys($this->_rule) as $k){
 			if ($k<=0)continue;
 			$this->_storage->add($this->_key(self::IS_BLOCK, $k),$k);//
 			$this->_storage->add($this->_key(self::IS_CAPTCHA, $k),$k);//
@@ -156,7 +156,7 @@ class RequestLimit{
 	 * @param string $code
 	 * @return boolean
 	 */
-	public function run($code=null){
+	public function run(?string $code=null):bool{
 		$is=$this->is();
 		if ($is==self::IS_PASS){
 			$this->_set();
